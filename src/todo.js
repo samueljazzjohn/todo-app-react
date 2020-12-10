@@ -1,6 +1,10 @@
 import React,{Component} from 'react';
-import {Col,Row,Button,Input,InputGroup,InputGroupAddon,InputGroupText, Container, Table} from 'reactstrap';
-import './todo.css'
+import {UncontrolledAlert,Alert,Col,Row,Button,Input,InputGroup,InputGroupAddon,InputGroupText, Container, Table} from 'reactstrap';
+import './todo.css';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+
 
 
 class Todo extends Component{
@@ -10,8 +14,14 @@ class Todo extends Component{
         this.state={
             textEntered:"",
             list:[],
+            visible:false,
+            alert:''
 
         }
+    }
+
+    toggle=()=>{
+        this.setState({visible:!this.state.visible})
     }
 
     showText=(e)=>{
@@ -21,10 +31,14 @@ class Todo extends Component{
     addToScreen=(e)=>{
         if(this.state.textEntered==='')
         {
-            alert("Please enter something")
+            this.state.alert="please enter qualification details"
+            this.setState({alert:this.state.alert})
+            this.toggle()
         }
-        if(this.state.list.includes(this.state.textEntered)){
-            alert("This is already entered")
+        else if(this.state.list.includes(this.state.textEntered)){
+            this.state.alert="This is already exist in the list"
+            this.setState({alert:this.state.alert})
+            this.toggle()
         }
         else{
             this.state.list.push(this.state.textEntered)
@@ -51,11 +65,19 @@ class Todo extends Component{
 
     clear=()=>{this.setState({textEntered:""})}
 
+
     render(){
         return(
             <React.Fragment>
                 <Container>
-                    <Row className="pt-5 pl-4 justify-content-center">
+                    <Row>
+                        <Col className="pt-2">
+                            <Alert color="danger" isOpen={this.state.visible} toggle={this.toggle}>
+                                {this.state.alert}
+                            </Alert>
+                        </Col>
+                    </Row>
+                    <Row className="pt-4 pl-4 justify-content-center">
                         <Col md={8} className="pt-5 addfield ">
                             <InputGroup>
                                 <Input className="ml-2 mt-2 float-right text-center" value={this.state.textEntered} placeholder="Add qualification details" type="text" onChange={this.showText}/>
@@ -88,8 +110,8 @@ class Todo extends Component{
                                             <tr>
                                                 <td>{k+1}</td>
                                                 <td>{itm.toUpperCase()}</td>
-                                                 <td><Button className="pl-4 pr-4 mt-1" color="danger" onClick={()=>this.delete(k)}>DELETE </Button>{' '}
-                                                 <Button className="pl-4 pr-4 mt-1" color="danger" onClick={()=>this.edit(k)} >EDIT </Button></td>
+                                                 <td><Button className="pl-4 pr-4 mt-1" color="danger" onClick={()=>{if(window.confirm('Doyou wnat to delete the item?')) {this.delete(k)};}}>DELETE </Button>{' '}
+                                                 <Button className="pl-4 pr-4 mt-1" color="danger" onClick={()=>{if(window.confirm('Do you wnat to edit?')) {this.edit(k)};}} >EDIT </Button></td>
                                             </tr>
                                         )
                                     })}

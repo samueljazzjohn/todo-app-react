@@ -9,9 +9,9 @@ function App() {
       <header className="App-header">
         <Todo color="white"/>
       </header>
-      <footer>
+      {/* <footer>
         <Alert />
-      </footer>
+      </footer> */}
     </div>
   );
 }

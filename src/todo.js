@@ -102,10 +102,6 @@ class Todo extends Component{
           if (text) {
             Swal.fire(`Your added qualification  is ${text}`)
           }
-        this.state.textEntered=this.state.list[k]
-        this.state.list.splice(k, 1);
-        this.setState({list:this.state.list });
-        this.setState({textEntered:this.state.textEntered})
     }
 
 
@@ -115,7 +111,7 @@ class Todo extends Component{
     render(){
         return(
             <React.Fragment>
-                <Container>
+                <Container className="pt-5">
                     {/* <Row>
                         <Col className="pt-2">
                             <Alert color="danger" isOpen={this.state.visible} toggle={this.toggle} id="alert">
@@ -123,8 +119,8 @@ class Todo extends Component{
                             </Alert>
                         </Col>
                     </Row> */}
-                    <Row className="p-4  mt-5 justify-content-center" id="header">
-                        <Col lg={6} className="pt-5  addfield ">
+                    <Row className="p-4 pt-5 justify-content-center" id="header">
+                        <Col lg={6} className=" pt-5  addfield ">
                             <InputGroup id="searchparent">
                                 <Input id="search" className="  text-center" value={this.state.textEntered} placeholder="Add qualification details" type="text" onChange={this.showText}/>
                             </InputGroup>

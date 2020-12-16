@@ -7,13 +7,56 @@
     width:75%;
     margin:auto;
     border-radius: 10px;
-    box-shadow: 0 1px 2px 0px whitesmoke;
+    box-shadow: 0 7px 6px rgb(27 25 25);
     color: rgb(103 101 101);
 }
 #button{
     background-color: #282c34;
-    border:#282c34;
+    border:none;
+    outline: none;
+    color: rgb(103 101 101);
 }
+
 #search{
-    outline: rgb(103 101 101);
+    background-color: rgb(103 101 101);
+    outline:none;
+    color:#282c34;
+    border-top: none;
+    border-left: none;
+    border-right:none;
+    border-bottom: 1px solid #282c34;
+}
+#search::placeholder{
+    color:#282c34;
+}
+#search:focus{
+    outline: 0px none;
+    box-shadow: inset 0 0px 0 #282c34 ;
+}
+
+#listitem{
+    background-color: rgb(103 101 101);
+    width:75%;
+    margin:auto;
+    color:#282c34;  
+    border-radius: 5px;
+    box-shadow: 0 7px 6px rgb(27 25 25);
+    display: flex;
+
+}
+#delete-icon{
+    text-align: right;
+    flex: inherit;
+    width:20px;
+
+}
+#edit-icon{
+    text-align: right;
+    flex: 2;
+
+}
+#alert{
+    background-color: rgb(103 101 101);
+    border:none;
+    color: white;
 }

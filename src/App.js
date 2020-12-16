@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Todo from './todo';
+import Alert from './samplealert'
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
       <header className="App-header">
         <Todo color="white"/>
       </header>
+      <footer>
+        <Alert />
+      </footer>
     </div>
   );
 }

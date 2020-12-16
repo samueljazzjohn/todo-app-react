@@ -3,25 +3,25 @@
     max-width: 65%;
 }
 #header{
-    background-color: rgb(103 101 101);
+    background-color: rgb(185 178 178);
     width:75%;
     margin:auto;
     border-radius: 10px;
     box-shadow: 0 7px 6px rgb(27 25 25);
-    color: rgb(103 101 101);
+    color: rgb(185 178 178);
 }
 #button{
     background-color: #282c34;
     border:none;
     outline: none;
-    color: rgb(103 101 101);
+    color: rgb(185 178 178);
 }
 #button:focus{
     outline: none;
     box-shadow: inset 0 0 0   #282c34;
 }
 #search{
-    background-color: rgb(103 101 101);
+    background-color: rgb(185 178 178);
     outline:none;
     color:#282c34;
     border-top: none;
@@ -38,7 +38,7 @@
 }
 
 #listitem{
-    background-color: rgb(103 101 101);
+    background-color: rgb(185 178 178);
     width:75%;
     margin:auto;
     color:#282c34;  
@@ -59,7 +59,10 @@
 
 }
 #alert{
-    background-color: rgb(103 101 101);
+    background-color: rgb(185 178 178);
     border:none;
     color: white;
+}
+.sweet-alert-modal{
+    background-color: rgba(185 178 178,8);
 }

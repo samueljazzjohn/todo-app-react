@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import {ListGroup,ListGroupItem,UncontrolledAlert,Alert,Col,Row,Button,Input,InputGroup,InputGroupAddon,InputGroupText, Container, Table} from 'reactstrap';
 import './todo.css';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
+import AlertTemplate from 'react-alert-template-basic';
+import Swal from 'sweetalert2';
 
 
 
@@ -31,14 +32,23 @@ class Todo extends Component{
     addToScreen=(e)=>{
         if(this.state.textEntered==='')
         {
-            this.state.alert="please enter qualification details"
-            this.setState({alert:this.state.alert})
-            this.toggle()
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                className:'sweet-alert',
+                closeOnClickOutside: false,
+                text: 'please enter your qualification details!'
+              })
+
         }
         else if(this.state.list.includes(this.state.textEntered)){
-            this.state.alert="This is already exist in the list"
-            this.setState({alert:this.state.alert})
-            this.toggle()
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                className:'sweet-alert',
+                closeOnClickOutside: false,
+                text: 'This is already exist in your list!'
+              })
         }
         else{
             this.state.list.push(this.state.textEntered)
@@ -49,13 +59,49 @@ class Todo extends Component{
     }
 
     delete=(k)=>{
-        this.state.list.splice(k, 1);
-        this.setState({list:this.state.list });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                this.state.list.splice(k, 1);
+                this.setState({list:this.state.list });
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
 
 
     }
     
-    edit=(k)=>{
+    edit=async (k)=>{
+        const { value: text } = await Swal.fire({
+            title: 'Enter your qaulification details',
+            input: 'text',
+            inputLabel: 'Your qualification',
+            inputValue:this.state.list[k],
+            showCancelButton: true,
+            inputValidator: (value) => {
+              if (!value) {
+                return 'You need to write something!'
+              }else{
+                  this.state.list.splice(k,1,value)
+                  this.setState({list:this.state.list });
+              }
+            }
+          })
+          
+          if (text) {
+            Swal.fire(`Your added qualification  is ${text}`)
+          }
         this.state.textEntered=this.state.list[k]
         this.state.list.splice(k, 1);
         this.setState({list:this.state.list });
@@ -70,13 +116,13 @@ class Todo extends Component{
         return(
             <React.Fragment>
                 <Container>
-                    <Row>
+                    {/* <Row>
                         <Col className="pt-2">
                             <Alert color="danger" isOpen={this.state.visible} toggle={this.toggle} id="alert">
                                 {this.state.alert}
                             </Alert>
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row className="p-4  mt-5 justify-content-center" id="header">
                         <Col lg={6} className="pt-5  addfield ">
                             <InputGroup id="searchparent">
@@ -95,8 +141,8 @@ class Todo extends Component{
                                         return (
                                         <ListGroup >
                                             <ListGroupItem key='k' className="pl-5 mb-4" id="listitem" >{itm.toUpperCase()}
-                                            <i class="far fa-edit" id="edit-icon" onClick={()=>{if(window.confirm('Do you wnat to edit?')) {this.edit(k)};}}></i>
-                                            <i class="fas fa-times" id='delete-icon' onClick={()=>{if(window.confirm('Doyou wnat to delete the item?')) {this.delete(k)};}}></i></ListGroupItem>
+                                            <i class="far fa-edit" id="edit-icon" onClick={()=>{this.edit(k)}}></i>
+                                            <i class="fas fa-times" id='delete-icon' onClick={()=>{this.delete(k)}}></i></ListGroupItem>
                                           </ListGroup>
                                             
                                         )

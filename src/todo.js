@@ -77,15 +77,15 @@ class Todo extends Component{
                             </Alert>
                         </Col>
                     </Row>
-                    <Row className="pt-4 pl-4 justify-content-center">
-                        <Col md={8} className="pt-5 addfield ">
-                            <InputGroup>
-                                <Input className="ml-2 mt-2 float-right text-center" value={this.state.textEntered} placeholder="Add qualification details" type="text" onChange={this.showText}/>
+                    <Row className="p-4  mt-5 justify-content-center" id="header">
+                        <Col md={6} className="pt-5  addfield ">
+                            <InputGroup >
+                                <Input id="search" lassName="ml-2 mt-2  text-center" value={this.state.textEntered} placeholder="Add qualification details" type="text" onChange={this.showText}/>
                             </InputGroup>
                         </Col>
-                        <Col md={4} className="pt-5 addfield ">
-                            <Button className="pl-4 pr-4 mt-2" color="danger" onClick={this.addToScreen} >ADD </Button>{' '}
-                            <Button className=" mt-2" color="danger" onClick={this.clear}>CLEAR</Button>{' '}
+                        <Col md={4} className="pt-5 pb-5 addfield text-center">
+                            <Button id='button'  className="pl-4 pr-4  " color="danger" onClick={this.addToScreen} >ADD </Button>{' '}
+                            <Button id='button' className="  " color="danger" onClick={this.clear}>CLEAR</Button>{' '}
                         </Col>
                     </Row>
 
@@ -102,7 +102,7 @@ class Todo extends Component{
                                 <tr className="text-center">
                                     <th  >SI NO</th>
                                     <th>QUALIFICATION</th>
-                                    <th></th>
+                                    <th>OPTIONS</th>
                                 </tr>
                                 <tbody className="text-center">
                                     {this.state.list.map((itm, k) => {
